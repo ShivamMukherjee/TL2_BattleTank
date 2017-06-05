@@ -18,3 +18,4 @@ BuildingEscape/Content/StarterContent/
 # All files which can be reproduced by VS #
 ###########################################
 *.VC.db
+*.suo
