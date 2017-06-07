@@ -22,7 +22,9 @@ void UPositionReporter::BeginPlay()
 
 	FVector ActorLocation = GetOwner()->GetTransform().GetLocation();
 	UE_LOG(LogTemp, Warning, TEXT("%s in position %s"), 
-		*GetOwner()->GetName(), *ActorLocation.ToString());
+		*GetOwner()->GetName(),
+		*ActorLocation.ToString()
+	)
 	
 }
 

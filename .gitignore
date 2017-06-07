@@ -11,7 +11,8 @@
 ###################################################
 # Starter Content - ignored only for this project #
 ###################################################
-BuildingEscape/Content/StarterContent/
+BuildingEscape/Content/StarterContent/Textures
+BuildingEscape/Content/StarterContent/HDRI
 
 
 ###########################################
