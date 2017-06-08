@@ -88,7 +88,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	if (this->PhysicsHandle->GrabbedComponent)
 	{
 		FVector Dummy, LineTraceEnd;
-		GetLineTraceEndPoints(OUT Dummy, OUT LineTraceEnd);
+		GetReachLineEndpoints(OUT Dummy, OUT LineTraceEnd);
 
 		// move object we're holding each frame
 		this->PhysicsHandle->SetTargetLocation(LineTraceEnd);
@@ -96,11 +96,9 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 }
 
 // Get the starting and ending positions of the line trace used for locating and grabbing a physics body
-void UGrabber::GetLineTraceEndPoints(FVector& PlayerViewPointLocation, FVector& OutLineTraceEnd)
+void UGrabber::GetReachLineEndpoints(FVector& PlayerViewPointLocation, FVector& OutLineTraceEnd)
 {
 	FRotator PlayerViewPointRotation;
-
-	GetWorld()->
 
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
 		OUT PlayerViewPointLocation,
@@ -116,7 +114,7 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 	FVector PlayerViewPointLocation;
 	FVector LineTraceEnd;
 
-	this->GetLineTraceEndPoints(OUT PlayerViewPointLocation, OUT LineTraceEnd);
+	this->GetReachLineEndpoints(OUT PlayerViewPointLocation, OUT LineTraceEnd);
 
 	// Draw a debug trace in the world to visualise
 	//DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(30, 40, 50), false, 0.f, 0.f, 10.f);

@@ -47,5 +47,5 @@ private:
 	const FHitResult GetFirstPhysicsBodyInReach();
 
 	// Get end points for line trace used for locating and grabbing Physics Bodies
-	void GetLineTraceEndPoints(FVector& OutLineTraceBegin, FVector& OutLineTraceEnd);
+	void GetReachLineEndpoints(FVector& OutLineTraceBegin, FVector& OutLineTraceEnd);
 };

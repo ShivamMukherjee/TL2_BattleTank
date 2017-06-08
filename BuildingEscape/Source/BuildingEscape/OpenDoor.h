@@ -44,4 +44,11 @@ private:
 
 	// Actor that opens the door by triggering the volume
 	AActor* DoorOpener;
+
+	// Mass that triggers the opening of the door
+	UPROPERTY(EditAnywhere)
+	float TriggerMass = 30.f;
+
+	// Returns total mass on plate in kilograms
+	float GetTotalMassOnPlate();
 };
