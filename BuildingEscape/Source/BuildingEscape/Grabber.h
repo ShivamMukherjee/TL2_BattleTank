@@ -28,5 +28,20 @@ private:
 	float Reach = 100.f;
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+	UInputComponent* InputComponent = nullptr;
+
+	// Line trace and grab what's in reach
+	void Grab();
 	
+	// Called when grab is released
+	void Release();
+
+	// Setup the input component (only appears at runtime)
+	void SetupInputComponent();
+
+	// Look for attached (assumed) Physics Handle
+	void FindPhysicsHandleComponent();
+
+	// Return hit for first physics body in reach
+	const FHitResult GetFirstPhysicsBodyInReach();
 };

@@ -11,9 +11,10 @@
 ###################################################
 # Starter Content - ignored only for this project #
 ###################################################
-BuildingEscape/Content/StarterContent/Textures
-BuildingEscape/Content/StarterContent/HDRI
-
+BuildingEscape/Content/StarterContent/
+^BuildingEscape/Content/StarterContent/Props/SM_Chair.uasset
+^BuildingEscape/Content/StarterContent/Props/SM_Couch.uasset
+^BuildingEscape/Content/StarterContent/Props/SM_TableRound.uasset
 
 ###########################################
 # All files which can be reproduced by VS #
