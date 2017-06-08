@@ -27,11 +27,12 @@ void UGrabber::Grab()
 	/// If an actor is reached, attach a Physics Handle
 	if (ActorHit)
 	{
-		this->PhysicsHandle->GrabComponent(
+		this->PhysicsHandle->GrabComponentAtLocationWithRotation(
 			ComponentToGrab,
 			NAME_None,
 			ComponentToGrab->GetOwner()->GetActorLocation(),
-			true // allow rotation, and make it look like shit if false
+			FRotator::ZeroRotator
+			//true: allow rotation, and make it look like shit if false
 		);
 	}
 }
@@ -97,24 +98,16 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	// if physics handle is attached
 	if (this->PhysicsHandle->GrabbedComponent)
 	{
-		FVector PlayerViewPointLocation;
-		FRotator PlayerViewPointRotation;
-
-		GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-			OUT PlayerViewPointLocation,
-			OUT PlayerViewPointRotation
-		);
-		FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
+		FVector Dummy, LineTraceEnd;
+		GetLineTraceEndPoints(Dummy, LineTraceEnd);
 
 		// move object we're holding each frame
 		this->PhysicsHandle->SetTargetLocation(LineTraceEnd);
 	}
 }
 
-const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
+void UGrabber::GetLineTraceEndPoints(FVector& PlayerViewPointLocation, FVector& OutLineTraceEnd)
 {
-	/// Get the player's viewpoint
-	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
 
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
@@ -122,7 +115,16 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 		OUT PlayerViewPointRotation
 	);
 
-	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
+	OutLineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach; 
+}
+
+const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
+{
+	/// Get the player's viewpoint
+	FVector PlayerViewPointLocation;
+	FVector LineTraceEnd;
+
+	this->GetLineTraceEndPoints(PlayerViewPointLocation, LineTraceEnd);
 
 	// Draw a debug trace in the world to visualise
 	//DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(30, 40, 50), false, 0.f, 0.f, 10.f);
