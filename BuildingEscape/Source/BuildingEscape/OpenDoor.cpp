@@ -21,7 +21,11 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	this->DoorOpener = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!this->PressurePlate)
+	{
+		UE_LOG(LogTemp, Error, TEXT("PressurePlate TriggerComponent uninitialised on %s"), *GetOwner()->GetName())
+	}
+
 }
 
 
@@ -61,6 +65,12 @@ float UOpenDoor::GetTotalMassOnPlate()
 
 	// Find all overlapping actors
 	TArray<AActor*> OverlappingActors;
+	
+	if (!this->PressurePlate)
+	{
+		return TotalMass;
+	}
+	
 	this->PressurePlate->GetOverlappingActors(OUT OverlappingActors);
 
 	// Iterate through them while adding their masses

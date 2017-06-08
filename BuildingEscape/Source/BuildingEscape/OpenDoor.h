@@ -33,7 +33,7 @@ private:
 
 	// The pressure plate trigger volume thst affects the door's opening
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate;
+	ATriggerVolume* PressurePlate = nullptr;
 
 	// Delay for which door is closed
 	UPROPERTY(EditAnywhere)
@@ -41,9 +41,6 @@ private:
 
 	// Last time frame at which door was open
 	float DoorOpenLastTime;
-
-	// Actor that opens the door by triggering the volume
-	AActor* DoorOpener;
 
 	// Mass that triggers the opening of the door
 	UPROPERTY(EditAnywhere)

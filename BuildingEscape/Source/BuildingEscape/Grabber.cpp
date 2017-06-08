@@ -17,6 +17,11 @@ UGrabber::UGrabber()
 
 void UGrabber::Grab()
 {
+	if (!this->PhysicsHandle)
+	{
+		return;
+	}
+
 	/// Line trace and see if we reach actors with Physics Body set
 	FHitResult Hit = this->GetFirstPhysicsBodyInReach();
 	UPrimitiveComponent* ComponentToGrab = Hit.GetComponent();
@@ -38,6 +43,11 @@ void UGrabber::Grab()
 
 void UGrabber::Release()
 {
+	if (!this->PhysicsHandle)
+	{
+		return;
+	}
+
 	this->PhysicsHandle->ReleaseComponent();
 }
 
@@ -83,6 +93,11 @@ void UGrabber::FindPhysicsHandleComponent()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (!this->PhysicsHandle)
+	{
+		return;
+	}
 
 	// if physics handle is attached
 	if (this->PhysicsHandle->GrabbedComponent)
