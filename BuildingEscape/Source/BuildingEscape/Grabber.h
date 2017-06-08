@@ -46,6 +46,6 @@ private:
 	// Return hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
 
-	// Get end points for line trace used for locating Physics Bodies
+	// Get end points for line trace used for locating and grabbing Physics Bodies
 	void GetLineTraceEndPoints(FVector& OutLineTraceBegin, FVector& OutLineTraceEnd);
 };
